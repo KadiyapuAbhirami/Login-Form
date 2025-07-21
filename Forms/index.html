@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Form</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      margin-top: 100px;
+    }
+    form {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    input, button {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+    }
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="loginForm">
+    <h3>Login</h3>
+    <input type="text" id="username" placeholder="Enter username" required>
+    <input type="password" id="password" placeholder="Enter password" required>
+    <button type="submit">Login</button>
+    <p id="message"></p>
+  </form>
+
+  <!-- ✅ JS should be placed just before closing </body> -->
+  <script>
+    const users = [
+      { username: 'admin', password: '1234' },
+      { username: 'Abhirami', password: 'jimin' },
+      { username: 'john', password: 'abcd' }
+    ];
+
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form reload
+
+      const enteredUsername = document.getElementById('username').value;
+      const enteredPassword = document.getElementById('password').value;
+
+      const foundUser = users.find(user =>
+        user.username === enteredUsername && user.password === enteredPassword
+      );
+
+      if (foundUser) {
+        message.textContent = `Welcome, ${foundUser.username}!`;
+        message.style.color = 'green';
+      } else {
+        message.textContent = 'Invalid credentials!';
+        message.style.color = 'red';
+      }
+    });
+  </script>
+
+</body>
+</html>
